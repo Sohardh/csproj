@@ -1,16 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk" >
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp4</TargetFrameworks>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-
+    <TargetFrameworkVersion>v4.8.0</TargetFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Moq" Version="4.16.0" />
-    
+    <PackageReference Include="DotNetNuke.Core" Version="9.2.1.533" />
   </ItemGroup>
-</Project>
+<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>  
