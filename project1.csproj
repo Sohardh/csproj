@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFrameworks>netcoreapp2.1</TargetFrameworks></PropertyGroup><ItemGroup><PackageReference Include="LX.PdF.BE.Common.Policies" Version="1.0.3"/></ItemGroup></Project>
