@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net4;net45</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+	 <PackageReference Include="AdvancedStringBuilder" Version="0.1.0" />
+	 <PackageReference Include="Antlr" Version="3.5.0.2" />
+ </ItemGroup>
+</Project>
