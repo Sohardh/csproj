@@ -1,0 +1,5 @@
+namespace ABC
+{
+  class NoImportWithNamespaces {
+  }
+}
