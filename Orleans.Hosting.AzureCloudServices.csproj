@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Microsoft.Orleans.Hosting.AzureCloudServices</PackageId>
+    <Title>Microsoft Orleans Hosting on Azure Cloud Services</Title>
+    <Description>Hosting utilities for Azure Cloud Services of Microsoft Orleans.</Description>
+    <PackageTags>$(PackageTags) Azure Cloud Services</PackageTags>
+    <TargetFrameworks>$(StandardTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>Orleans.Hosting.AzureCloudServices</AssemblyName>
+    <RootNamespace>Orleans.Hosting.AzureCloudServices</RootNamespace>
+    <OrleansBuildTimeCodeGen>true</OrleansBuildTimeCodeGen>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="$(MicrosoftCSharpVersion)" />
+  </ItemGroup>
+
+</Project>
