@@ -1,0 +1,62 @@
+plugins {
+    id 'java-library'
+}
+repositories {
+
+    maven {
+        url "file:///opt/.m2/repo/"
+    }
+
+    maven {
+        url "http://sca-nrm01.tools.bo.local:8080/artefact/repository/bo-sca-proxy";
+        allowInsecureProtocol = true
+        credentials {
+            username = "ReadOnlyUser"
+            password = "5?._f#p6dvx-n^7,"
+        }
+    }
+
+}
+dependencies {
+    testImplementation('junit:junit:4.12')
+}
+
+import groovy.json.JsonBuilder;
+
+task printDependencyTreeInJSON {
+    ext.createDepNode = { dep ->
+        def filepath = dep.getModuleArtifacts()[0] ? dep.getModuleArtifacts()[0].file.toString() : "";
+        def depMap = ["groupId"   : dep.module.id.group,
+                      "artifactId": dep.module.id.name,
+                      "version"   : dep.module.id.version,
+                      "filePath"  : filepath,
+                      "scope"     : dep.getConfiguration()]
+        depMap["childNodes"] = []
+        if (dep.children.size() != 0) {
+            dep.children.each { childDep ->
+                if (dep in childDep.getParents()) {
+                    depMap["childNodes"].add(createDepNode(childDep))
+                }
+            }
+        }
+        return depMap
+    }
+    doLast {
+        def deps = []
+        configurations.compileClasspath.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
+            deps.add(ext.createDepNode(dep))
+        }
+        configurations.runtimeClasspath.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
+            deps.add(ext.createDepNode(dep))
+        }
+        configurations.testCompileClasspath.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
+            deps.add(ext.createDepNode(dep))
+        }
+        def tree = ["groupId"   : project.group,
+                    "artifactId": project.name,
+                    "version"   : project.version,
+                    "childNodes": deps]
+        def jsonOutput = new JsonBuilder(tree).toPrettyString()
+        new File("${System.properties['user.home']}/sca-data-manager/GradleCliProcessTest/post_commit/dep_tree.json").text = jsonOutput
+    }
+}
